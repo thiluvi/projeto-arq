@@ -1,0 +1,36 @@
+<div class="login-container"> <div class="card-login">
+    <h2>Crie sua Conta</h2>
+    <p class="subtitulo">Preencha seus dados para começar.</p>
+
+    <form [formGroup]="form" (ngSubmit)="cadastrar()">
+      
+      <div class="grupo-input">
+        <label>Nome Completo</label>
+        <input type="text" formControlName="nome" placeholder="Ex: Ana Silva">
+      </div>
+
+      <div class="grupo-input">
+        <label>Telefone</label>
+        <input type="text" formControlName="telefone" placeholder="(11) 99999-9999">
+      </div>
+
+      <div class="grupo-input">
+        <label>E-mail</label>
+        <input type="email" formControlName="email" placeholder="seu@email.com">
+      </div>
+
+      <div class="grupo-input">
+        <label>Senha</label>
+        <input type="password" formControlName="senha" placeholder="Mínimo 6 caracteres">
+      </div>
+
+      <div class="erro" *ngIf="msgErro">{{ msgErro }}</div>
+
+      <button type="submit" [disabled]="form.invalid" class="btn-entrar">CADASTRAR</button>
+    </form>
+
+    <div class="rodape-card">
+      <p>Já possui conta? <a routerLink="/login">Faça Login</a></p>
+    </div>
+  </div>
+</div>

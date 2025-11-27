@@ -1,0 +1,121 @@
+<div class="dashboard-container">
+  
+  <header class="dash-header">
+    <div class="perfil-container">
+      
+      <div class="foto-wrapper" (click)="fileInput.click()" title="Alterar foto">
+        <img [src]="urlFotoPerfil" alt="Foto de Perfil" class="foto-perfil">
+        
+        <div class="overlay-edit">
+          <i class="fa-solid fa-camera"></i>
+        </div>
+      </div>
+
+      <input 
+        type="file" 
+        #fileInput 
+        style="display: none" 
+        (change)="onFileSelected($event)" 
+        accept="image/*"
+      >
+
+      <div class="texto-header">
+        <h1>Olá, {{ usuario.nome || 'Cliente' }}</h1>
+        <p>Acompanhe o andamento dos seus sonhos.</p>
+      </div>
+      
+    </div>
+  </header>
+
+  <div class="dash-grid">
+    
+    <section class="secao-lista">
+      <div class="titulo-secao">
+        <i class="fa-regular fa-calendar-check"></i>
+        <h2>Meus Agendamentos</h2>
+      </div>
+      
+      <div class="lista-consultas" *ngIf="consultas.length > 0; else semConsultas">
+        
+        <div class="card-consulta" *ngFor="let c of consultas">
+          
+          <div class="acoes-card">
+              <button class="btn-icon editar" (click)="prepararEdicao(c)" title="Editar">
+                  <i class="fa-solid fa-pen"></i>
+              </button>
+              <button class="btn-icon excluir" (click)="excluir(c.id)" title="Excluir">
+                  <i class="fa-solid fa-trash"></i>
+              </button>
+          </div>
+
+          <div class="card-status">
+              <span class="badge" [ngClass]="getStatusClass(c.status)">
+                {{ c.status }}
+              </span>
+          </div>
+          
+          <div class="card-info">
+              <span class="data-destaque">
+                  {{ c.data_consulta | date: 'dd/MM/yyyy' }} 
+                  <span class="hora">às {{ c.data_consulta | date: 'HH:mm' }}</span>
+              </span>
+              <p class="obs">{{ c.observacao }}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <ng-template #semConsultas>
+        <div class="vazio">
+          <i class="fa-solid fa-folder-open"></i>
+          <p>Nenhum agendamento encontrado.</p>
+        </div>
+      </ng-template>
+    </section>
+
+
+    <section class="secao-form">
+      <div class="card-form" [class.modo-edicao]="idEdicao">
+        
+        <div class="form-header">
+          <i class="fa-solid" [ngClass]="idEdicao ? 'fa-pen-to-square' : 'fa-plus-circle'"></i>
+          <h2>{{ idEdicao ? 'Editar Agendamento' : 'Nova Solicitação' }}</h2>
+        </div>
+        
+        <p>{{ idEdicao ? 'Altere os dados abaixo e salve.' : 'Escolha o melhor horário para conversarmos.' }}</p>
+
+        <form [formGroup]="form" (ngSubmit)="salvar()">
+          
+          <div class="grupo-input">
+            <label>Data e Hora</label>
+            <input type="datetime-local" formControlName="data">
+          </div>
+
+          <div class="grupo-input">
+            <label>Sobre o projeto</label>
+            <textarea formControlName="observacao" rows="4" placeholder="Descreva sua necessidade..."></textarea>
+          </div>
+
+          <div class="msg sucesso" *ngIf="msgSucesso">
+            <i class="fa-solid fa-check-circle"></i> {{ msgSucesso }}
+          </div>
+          <div class="msg erro" *ngIf="msgErro">
+            <i class="fa-solid fa-circle-exclamation"></i> {{ msgErro }}
+          </div>
+
+          <div class="grupo-botoes">
+            <button type="button" *ngIf="idEdicao" (click)="cancelarEdicao()" class="btn-cancelar">
+                Cancelar
+            </button>
+
+            <button type="submit" [disabled]="form.invalid" class="btn-agendar">
+                {{ idEdicao ? 'SALVAR ALTERAÇÕES' : 'SOLICITAR AGENDAMENTO' }}
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<header class="hero">
+  <div class="hero-content fade-on-scroll">
+    <h1>Transforme seu imóvel<br>em um espaço único.</h1>
+    <button class="btn-cta" [routerLink]="rotaDestino">Agende sua consulta</button>
+  </div>
+</header>
+
+<section class="sobre">
+  <div class="sobre-container">
+    <div class="texto">
+      <h2>Ana Carolina Oliveira</h2>
+      <p class="citacao">"Acredito que a arquitetura vai além do desenho e da técnica; ela é a expressão física de uma ideia, a materialização de um propósito e a busca constante por criar espaços que dialoguem com a alma humana."</p>
+      <button class="btn-sobre" [routerLink]="rotaDestino">Agende sua consulta</button>
+    </div>
+    <div class="foto fade-on-scroll delay-200">
+      <img src="assets/images/anacarolinaimage.png" alt="Foto Ana Carolina Oliveira">
+    </div>
+  </div>
+</section>
+
+<section class="processos">
+  <div class="container-processos">
+    <h2 class="fade-on-scroll">CONHEÇA NOSSOS PROCESSOS</h2>
+    <p class="descricao-processos fade-on-scroll">
+      Trabalhamos Com Uma Metodologia Integrada Que Une Criatividade, Técnica E Sustentabilidade, 
+      Absorvendo As Necessidades Do Cliente E As Características Do Ambiente Para Criar Espaços 
+      Funcionais, Harmônicos E Atemporais.
+    </p>
+
+    <div class="grid-cards">
+      <div class="card fade-on-scroll">
+        <div class="icone">
+          <img src="../../assets/icons/consultoria.png" alt="Ícone Consultoria">
+        </div>
+        <h3>CONSULTORIA</h3>
+        <p>Análise De Viabilidade E Consultoria para Escolha Do Imóvel Ideal.</p>
+      </div>
+
+      <div class="card fade-on-scroll delay-100">
+        <div class="icone">
+          <img src="assets/icons/projeto.png" alt="Ícone Projeto">
+        </div>
+        <h3>PROJETO</h3>
+        <p>Criação De Layouts, Projetos Executivos, Compatibilização Dos Projetos Complementares.</p>
+      </div>
+
+      <div class="card fade-on-scroll delay-200">
+        <div class="icone">
+           <img src="assets/icons/obra.png" alt="Ícone Gerenciamento">
+        </div>
+        <h3>GERENCIAMENTO DE OBRAS</h3>
+        <p>Estudo De Viabilidade, Assessoria Na Seleção Do Imóvel e Acompanhamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="slider-section fade-on-scroll">
+  <div class="slider-container">
+    <h2 class="slider-title">NOSSOS PROJETOS</h2>
+
+    <div class="slider-viewport">
+      <div class="slider-wrapper">
+
+        <div 
+          *ngFor="let project of projects; let i = index"
+          class="slide-item"
+          [ngClass]="getSlideClass(i)"
+          (click)="goToSlide(i)">
+
+          <img [src]="project.image" [alt]="project.title" class="slide-image">
+
+          <div class="slide-caption">
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description }}</p>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="slider-button prev" (click)="prevSlide(); $event.stopPropagation()">&#10094;</button>
+      <button class="slider-button next" (click)="nextSlide(); $event.stopPropagation()">&#10095;</button>
+    </div>
+
+    <div class="slider-pagination">
+      <button 
+        *ngFor="let p of projects; let i = index"
+        class="pagination-dot"
+        [class.active]="i === currentIndex"
+        (click)="goToSlide(i)">
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<footer class="contato-footer fade-on-scroll">
+  <div class="footer-container">
+    
+    <div class="footer-header">
+      <h2>VAMOS CONVERSAR?</h2>
+      <p>Acompanhe nossos projetos ou entre em contato para tirar dúvidas.</p>
+    </div>
+
+    <div class="contatos-grid">
+      
+      <a href="mailto:anacarolina.oliveira04@hotmail.com" class="contato-item">
+        <div class="icone-circulo">
+          <i class="fa-regular fa-envelope"></i>
+        </div>
+        <h3>E-MAIL</h3>
+        <span>anacarolina.oliveira04&#64;hotmail.com</span>
+      </a>
+
+      <a href="https://www.linkedin.com/in/ana-carol-oliveira/" target="_blank" class="contato-item">
+        <div class="icone-circulo">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </div>
+        <h3>LINKEDIN</h3>
+        <span>Ana Carolina Oliveira</span>
+      </a>
+
+      <a href="https://www.instagram.com/arq.anaolivsr/" target="_blank" class="contato-item">
+        <div class="icone-circulo">
+          <i class="fa-brands fa-instagram"></i>
+        </div>
+        <h3>INSTAGRAM</h3>
+        <span>arq.anaolivsr</span>
+      </a>
+
+    </div>
+
+    <div class="copyright">
+      <p>© 2025 C Arquitetura. Todos os direitos reservados.</p>
+    </div>
+
+  </div>
+</footer>

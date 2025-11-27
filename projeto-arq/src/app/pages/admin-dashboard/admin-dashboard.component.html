@@ -1,0 +1,164 @@
+<div class="admin-container">
+  
+  <header class="admin-header">
+    <h1>Painel Administrativo</h1>
+    <p>Controle total sobre agendamentos e conteúdo do site.</p>
+  </header>
+
+  <section class="secao-admin">
+    <div class="titulo-secao">
+      <i class="fa-solid fa-list-check"></i>
+      <h2>Solicitações de Agendamento</h2>
+    </div>
+
+    <div class="tabela-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Cliente</th>
+            <th>Contato</th>
+            <th>Observação</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of consultas">
+            <td class="col-data">
+              <strong>{{ c.data_consulta | date: 'dd/MM/yyyy' }}</strong><br>
+              <small>{{ c.data_consulta | date: 'HH:mm' }}</small>
+            </td>
+            
+            <td>
+              {{ c.nome }}
+            </td>
+
+            <td>
+                <div>{{ c.email }}</div>
+                <small>{{ c.telefone }}</small>
+            </td>
+
+            <td class="col-obs" title="{{ c.observacao }}">
+              {{ c.observacao }}
+            </td>
+
+            <td>
+              <span class="badge" [ngClass]="getStatusClass(c.status)">
+                {{ c.status }}
+              </span>
+            </td>
+
+            <td>
+              <div class="acoes-btn">
+                <button (click)="mudarStatus(c.id, 'Confirmada')" class="btn-check" title="Aprovar">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button (click)="mudarStatus(c.id, 'Cancelada')" class="btn-cancel" title="Recusar">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div *ngIf="consultas.length === 0" class="vazio">
+        Nenhuma solicitação encontrada.
+      </div>
+    </div>
+  </section>
+
+
+  <section class="secao-admin mt-5">
+    <div class="titulo-secao">
+      <i class="fa-regular fa-images"></i>
+      <h2>Projetos na Home (Slider)</h2>
+    </div>
+
+    <div class="card-upload">
+      <h3>Adicionar Novo Projeto</h3>
+      <form [formGroup]="formSlider" (ngSubmit)="adicionarFoto()">
+        <div class="input-group">
+          <input type="text" formControlName="titulo" placeholder="Título do Projeto (ex: Sala de Estar)">
+          <input type="file" (change)="onFileSelected($event)" accept="image/*">
+          <button type="submit" class="btn-upload">ENVIAR</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="grid-slider">
+      <div class="card-img" *ngFor="let img of imagensSlider">
+        <img [src]="img.urlCompleta" [alt]="img.titulo">
+        <div class="info-img">
+          <span>{{ img.titulo }}</span>
+          <button (click)="deletarFoto(img.id)" class="btn-trash">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+
+<section class="secao-admin mt-5">
+  <div class="titulo-secao">
+    <i class="fa-regular fa-comments"></i>
+    <h2>Central de Mensagens</h2>
+  </div>
+
+  <div class="admin-chat-layout">
+    
+    <div class="lista-clientes">
+      <div *ngFor="let conversa of conversas" 
+           class="item-conversa" 
+           (click)="abrirChatAdmin(conversa)"
+           [class.ativo]="chatAtivo?.id === conversa.id">
+        
+        <img [src]="'http://localhost:5010/' + conversa.foto_perfil" 
+             onerror="this.src='assets/icons/user-placeholder.png'" 
+             class="avatar-mini">
+        
+        <div class="info-conversa">
+          <strong>{{ conversa.nome }}</strong>
+          <p>{{ conversa.ultima_msg || 'Iniciar conversa' }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-msg-admin" *ngIf="chatAtivo; else selecioneChat">
+      
+      <div class="chat-header-admin" style="padding: 15px; background: white; border-bottom: 1px solid #eee;">
+        <strong>Conversando com: {{ chatAtivo.nome }}</strong>
+      </div>
+
+      <div class="msgs-container" #scrollAdmin>
+        <div *ngFor="let msg of msgsAdmin" 
+             class="msg-bala" 
+             [ngClass]="msg.remetente === 'admin' ? 'minha' : 'deles'">
+          <p>{{ msg.texto }}</p>
+          <span class="hora">{{ msg.data_envio | date:'HH:mm' }}</span>
+        </div>
+      </div>
+      
+      <div class="input-admin">
+        <input [(ngModel)]="txtAdmin" (keyup.enter)="enviarAdmin()" placeholder="Digite sua resposta...">
+        <button (click)="enviarAdmin()">
+          <i class="fa-solid fa-paper-plane"></i> </button>
+      </div>
+    </div>
+
+    <ng-template #selecioneChat>
+      <div class="aviso-selecao">
+        <div>
+          <i class="fa-regular fa-comments" style="font-size: 3rem; display: block; margin-bottom: 10px; text-align: center;"></i>
+          Selecione um cliente ao lado para ver as mensagens.
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</section>

@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="logo">
+    <img src="assets/icons/C Logo.png" alt="">
+    <a routerLink="/"></a>
+  </div>
+
+  <div class="menu">
+    <a routerLink="/" class="link">Início</a>
+
+    <a *ngIf="!usuario" routerLink="/login" class="btn-destaque">
+      Área do Cliente
+    </a>
+
+    <div class="menu-logado" *ngIf="usuario">
+      
+      <a [routerLink]="usuario.role === 'admin' ? '/painel-admin' : '/painel-usuario'" class="link-painel">
+        Olá, {{ usuario.nome.split(' ')[0] }} </a>
+
+      <button (click)="sair()" class="btn-sair">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+      
+    </div>
+
+  </div>
+</nav>

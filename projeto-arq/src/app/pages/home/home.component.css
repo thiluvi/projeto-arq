@@ -1,0 +1,473 @@
+/* Definição de Variáveis CSS (Cores do Projeto) */
+/* asdasdasdasdasd */
+:root {
+  --color-accent: #F7F5EF;       /* Bege Claro (Fundo) */
+  --color-secondary: #3E2723;    /* Marrom (Destaques) */
+  --color-text-dark: #142518;    /* Verde Escuro (Títulos) */
+  --color-text-light: #ffffff;   /* Texto Branco */
+}
+
+/* ================== HERO SECTION ================== */
+.hero {
+  height: 85vh;
+  /* CAMINHO DA IMAGEM DE FUNDO LOCAL */
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/assets/images/sala.png'); 
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  padding-left: 12%;
+}
+
+.hero h1 {
+  font-family: 'Times New Roman', serif; /* Fonte elegante */
+  font-size: 4.6rem;
+  color: var(--branco);
+  margin-bottom: 2.5rem;
+  line-height: 1.1;
+  font-weight: normal;
+  color: #ffffff;
+}
+
+.btn-cta {
+    background-color: #ffffff6e;
+  border: 2px solid var(--branco);
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: sans-serif;
+}
+
+.btn-cta:hover {
+background-color: #ffffff;
+}
+
+/* ================== SEÇÃO SOBRE ================== */
+.sobre {
+  background-color:#F7F4EB;
+  padding: 6rem 12%;
+  color: var(--verde-escuro);
+}
+
+.sobre-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+}
+
+.sobre .texto {
+  flex: 1; /* Ocupa o espaço disponível */
+  max-width: 500px;
+}
+
+.sobre h2 {
+  font-size: 48px;
+  margin-bottom: 1.5rem;
+  font-family: sans-serif;
+}
+
+.sobre .citacao {
+  font-size: 22px;
+  line-height: 1.6;
+  font-style: italic;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--marrom); /* Detalhe lateral */
+  padding-left: 1.5rem;
+  font-family: sans-serif;
+}
+
+.btn-sobre {
+  background-color: #ffffff;
+  border: 1px solid #3e27237c;
+  padding: 12px 35px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: sans-serif;
+}
+
+.btn-sobre:hover {
+  background-color: #3E2723;
+    color: #ffffff;
+}
+
+.sobre .foto img {
+  width: 400px;
+  height: auto;
+}
+
+/* ================== SLIDER SECTION ================== */
+.slider-section {
+  padding: 100px 0; 
+  
+  background-color: var(--color-accent); 
+  text-align: center;
+  overflow: hidden; 
+}
+
+.slider-title {
+  font-family: inter,sans-serif;
+  font-size: 2.5rem;
+  color: var(--color-text-dark);
+  margin-bottom: 40px;
+}
+
+.slider-container {
+  max-width: 100%; 
+  margin: 0 auto;
+  position: relative;
+}
+
+
+.slider-viewport {
+  position: relative;
+  height: 600px; 
+  
+  perspective: 1500px;
+}
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 70%; 
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  overflow: hidden;
+
+  
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out, z-index 0s 0.3s;
+
+  
+  opacity: 0;
+  transform: translateX(0) scale(0.7);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.slide-item--active {
+  opacity: 1;
+  transform: translateX(0) scale(1); 
+  z-index: 10;
+  cursor: default;
+}
+
+.slide-item--prev {
+  opacity: 0.4;
+  transform: translateX(-45%) scale(0.85);
+  z-index: 5;
+}
+
+.slide-item--next {
+  opacity: 0.4;
+  transform: translateX(45%) scale(0.85); 
+  z-index: 5;
+}
+
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.8);
+  transition: transform 0.6s ease-out;
+}
+.slide-item:hover .slide-image {
+  transform: scale(1.05); 
+}
+.slide-item--active:hover .slide-image {
+  transform: none; 
+}
+
+
+
+.slide-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: var(--color-text-light);
+  padding: 60px 40px 40px;
+  box-sizing: border-box;
+  text-align: left;
+  
+ 
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease-out 0.3s, transform 0.4s ease-out 0.3s;
+}
+
+
+.slide-item--active .slide-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-caption h3 {
+  font-family: inter,sans-serif;
+  font-size: 2.2rem;
+  margin: 0 0 10px 0;
+  color: white;
+}
+
+.slide-caption p {
+  font-family: inter,sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  opacity: 0.9;
+  color: white;
+}
+
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 15;
+}
+.slider-button:hover {
+  background-color: white;
+}
+.slider-button.prev { left: 20px; }
+.slider-button.next { right: 20px; }
+
+.slider-pagination {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.pagination-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-secondary); 
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+.pagination-dot.active {
+  background-color: var(--color-secondary); 
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+
+
+/* ================== SEÇÃO PROCESSOS ================== */
+.processos {
+  background-color: #142518;
+  padding: 6rem 10%;
+  text-align: center;
+  color: #ffffff;
+}
+
+.container-processos {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grid-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* NOVO: Estilo para os ícones locais (IMAGENS) */
+.card .icone {
+  margin-bottom: 1.5rem;
+  height: 70px; /* Altura fixa para alinhar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card .icone img {
+  width: 90px; /* Tamanho do ícone */
+  height: auto;
+  
+  /* DICA DE OURO: Se seus ícones forem pretos e você quiser que fiquem brancos via código,
+     descomente a linha abaixo. Se já forem brancos, pode ignorar. */
+  /* filter: brightness(0) invert(1); */
+}
+
+.card h3 {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  color: #F7F4EB;
+}
+
+
+
+
+/* ================== FOOTER / CONTATO ================== */
+.contato-footer {
+  background-color: #142518; /* Fundo #142518 */
+  color: #ffffff;
+  padding: 5rem 10% 2rem 10%; /* Espaçamento generoso no topo */
+  text-align: center;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Cabeçalho do Footer */
+.footer-header h2 {
+  font-family: sans-serif;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.footer-header p {
+  color: rgba(255, 255, 255, 0.7); /* Branco com transparência */
+  font-size: 1rem;
+  margin-bottom: 4rem;
+}
+
+/* Grid dos 3 Ícones */
+.contatos-grid {
+  display: flex;
+  justify-content: center;
+  gap: 4rem; /* Espaço entre os itens */
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+}
+
+/* Cada Item de Contato */
+.contato-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #ffffff;
+  transition: transform 0.3s ease;
+  min-width: 200px;
+}
+
+.contato-item:hover {
+  transform: translateY(-10px); /* Leve subida ao passar o mouse */
+}
+
+/* O Círculo ao redor do ícone */
+.icone-circulo {
+  width: 70px;
+  height: 70px;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Borda fina e discreta */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.contato-item:hover .icone-circulo {
+  background-color: #F7F5EF; /* Fundo fica bege no hover */
+  color: #142518; /* Ícone fica verde */
+  border-color: #F7F5EF;
+}
+
+.contato-item h3 {
+  font-size: 0.9rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+  color: #F7F5EF; /* Título em bege */
+}
+
+.contato-item span {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Copyright e Linha final */
+.copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+}
+
+.copyright p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+  .contatos-grid {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .footer-header h2 {
+    font-size: 1.5rem;
+  }
+}
+
+
+/* ================== ANIMAÇÃO SCROLL FADE ================== */
+
+/* Estado Inicial (Invisível e deslocado para baixo) */
+.fade-on-scroll {
+  opacity: 0;
+  transform: translateY(50px); /* Empurra 50px para baixo */
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform; /* Otimização de performance */
+}
+
+/* Estado Final (Visível e na posição original) */
+.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Dica: Para elementos que você quer que demorem um pouco mais (ex: cards) */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }

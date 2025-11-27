@@ -1,0 +1,32 @@
+<div class="chat-wrapper" *ngIf="usuarioLogado && usuarioLogado.role !== 'admin'">
+
+  <div class="chat-window" *ngIf="aberto">
+    <div class="chat-header">
+      <span>Fale Conosco</span>
+      <button (click)="toggleChat()">X</button>
+    </div>
+
+    <div class="chat-body" #scrollMe>
+      <div *ngFor="let msg of mensagens" 
+           class="msg-bala" 
+           [ngClass]="msg.remetente === 'user' ? 'minha' : 'deles'">
+        <p>{{ msg.texto }}</p>
+        <span class="hora">{{ msg.data_envio | date:'HH:mm' }}</span>
+      </div>
+      
+      <div *ngIf="mensagens.length === 0" class="sem-msg">
+        Olá! Como podemos ajudar no seu projeto?
+      </div>
+    </div>
+
+    <div class="chat-footer">
+      <input [(ngModel)]="textoInput" (keyup.enter)="enviar()" placeholder="Digite sua dúvida...">
+      <button (click)="enviar()">➤</button>
+    </div>
+  </div>
+
+  <button class="chat-fab" (click)="toggleChat()">
+    <i class="fa-solid fa-comments"></i>
+  </button>
+
+</div>
